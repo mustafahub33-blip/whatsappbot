@@ -18,11 +18,14 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Setup Gradle
+    - name: Setup Gradle (No Cache)
       uses: gradle/actions/setup-gradle@v3
+      with:
+        cache-read-only: true
+        generate-job-summary: false
 
     - name: Build Debug APK with Gradle
-      run: gradle assembleDebug
+      run: gradle assembleDebug --no-daemon
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
